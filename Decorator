@@ -1,0 +1,80 @@
+装饰器模式
+装饰器模式，顾名思义，就是对已经存在的某些类进行装饰，以此来扩展一些功能
+例如 ：component  concreteComponent Decorate conCreteDecorator
+
+Component为统一接口，也是装饰类和被装饰类的基本类型。
+ConcreteComponent为具体实现类，也是被装饰类，他本身是个具有一些功能的完整的类。
+Decorator是装饰类，实现了Component接口的同时还在内部维护了一个ConcreteComponent的实例
+ConcreteDecorator是具体的装饰产品类，每一种装饰产品都具有特定的装饰效果
+
+//基础接口
+public interface Component {
+    
+    public void biu();
+}
+//具体实现类
+public class ConcretComponent implements Component {
+
+    public void biu() {
+        
+        System.out.println("biubiubiu");
+    }
+}
+//装饰类
+public class Decorator implements Component {
+
+    public Component component;
+    
+    public Decorator(Component component) {
+        
+        this.component = component;
+    }
+    
+    public void biu() {
+        
+        this.component.biu();
+    }
+}
+//具体装饰类
+public class ConcreteDecorator extends Decorator {
+
+    public ConcreteDecorator(Component component) {
+
+        super(component);
+    }
+
+    public void biu() {
+        
+        System.out.println("ready?go!");
+        this.component.biu();
+    }
+}
+　　//使用装饰器
+　　Component component = new ConcreteDecorator(new ConcretComponent());
+　　component.biu();
+
+　　//console：
+　　ready?go!
+　　biubiubiu
+=====================================================================  
+  装饰类优点
+  装饰器的价值在于装饰，他并不影响被装饰类本身的核心功能。在一个继承的体系中，子类通常是互斥的；
+  
+  有相似处理内容的两个类，就可以通过装饰类来完成例如：做鱼 红烧 水煮，同样做鱼，有相同的准备步骤清理鱼 ，不同的是红烧水煮，清理鱼的步骤就可以放到
+  具体实现类中，而红烧和水煮的分别放到装饰类的具体实现类中；
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
