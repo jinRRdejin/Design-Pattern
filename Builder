@@ -1,0 +1,85 @@
+Client director builder product
+
+https://www.cnblogs.com/lwbqqyumidi/p/3742562.html
+Builder负责Product类对象的具体过程构建，Director负责指导Build，要求Builder按照其指定的顺序去完成Produt的构造。最后通过Builder返回建造后的结果
+
+简单地说，就好象我要一座房子住，可是我不知道怎么盖（简单的砌墙，层次较低），也不知道怎么样设计（建几个房间，几个门好看，层次较高），
+于是我需要找一帮民工，他们会砌墙，还得找个设计师，他知道怎么设计，我还要确保民工听设计师的领导，
+而设计师本身也不干活，光是下命令，这里砌一堵墙，这里砌一扇门，这样民工开始建设，最后，我可以向民工要房子了。
+在这个过程中，设计师是什么也没有，除了他在脑子里的设计和命令，所以要房子也是跟民工要，记住了！
+class Designer {
+    
+    public void command(Builder builder){
+        // 先建造地板
+        builder.makeFloor();
+        // 再建造窗户
+        builder.makeWindow();
+    }
+}
+public class Client {
+
+    public static void main(String[] args) {
+        // 先找来一个工人
+        Builder builder = new RoomBuilder();
+        // 再找来一个房屋设计师
+        Designer designer = new Designer();
+        // 工人按照设计师设计建造
+        designer.command(builder);
+        // 工人向雇主交房子
+        Room newRoom = builder.getRoom();
+    }
+
+}
+
+
+package com.qqyumidi;
+
+public class Client {
+
+    public static void main(String[] args) {
+        User.Builder builder = new User.Builder();
+        User user = builder.setName("corn").setAge(100).setAddress("广州").build();
+    }
+}
+
+class User {
+
+    private String name;
+    private int age;
+    private String address;
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public static class Builder {
+        private User user = new User();
+
+        public Builder setName(String name) {
+            user.name = name;
+            return this;
+        }
+
+        public Builder setAge(int age) {
+            user.age = age;
+            return this;
+        }
+
+        public Builder setAddress(String address) {
+            user.address = address;
+            return this;
+        }
+
+        public User build() {
+            return user;
+        }
+    }
+}
