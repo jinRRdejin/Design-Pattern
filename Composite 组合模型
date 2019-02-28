@@ -1,0 +1,12 @@
+组合模式(Composite Pattern)概念：
+
+组合多个对象形成树形结构以表示具有“整体—部分”关系的层次结构。组合模式对单个对象（即叶子对象）和组合对象（即容器对象）
+的使用具有一致性（根据多态），组合模式又可以称为“整体—部分”(Part-Whole)模式，它是一种对象结构型模式。
+
+component抽象构建
+leaf 叶子构建
+composite 组合构建   leaf 与composite都继承实现component ，且可以将component作为他们的方法参数传入，无论add还是remove
+
+https://www.cnblogs.com/lfxiao/p/6816026.html
+
+
