@@ -1,0 +1,14 @@
+
+
+策略模式：定义一系列的算法，把他们一个个封装起来，并使他们可以互相替换，本模式使得算法可以独立于使用它们的客户。
+Context Strategy接口 ConcreteStrategyA ConcreteStrategyB
+
+这个Context是干啥的啊。这个我认为就是一个封装接口的类，把接口孤零零的放在外面好像是不太美观，我们就通过Context类将他包装一下，Context类里面的操作都是通过委派这个接口来执行的，
+我们想要获得不同的策略只需要给这个Context类传入不同的实现类即可。
+
+public class ContextStrategy {
+    Strategy strategy;
+    public ContextStrategy(Strategy strategy){
+        this.strategy = strategy;
+    }
+}
