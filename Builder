@@ -1,3 +1,58 @@
+
+Builder 设计模式常用的使用场景
+
+（1）将一个复杂对象的构建与它的表示分离，即相同的构造过程可以有不同表示；
+（2）当有多个构造器且需要传入不同的参数表示不同的产品时（即可以弥补工厂模式等无法选择多参数的缺点）
+（3）传入参数情况比较灵活且复杂的情况，或者说一开始不需要明确参数的情况。
+（4）框架中很多Configuration配置都会用到Builder模式。
+
+public class User {
+    private String name;
+    private int age;
+    private int id;
+    private String address;
+    public User(Builder builder){
+        age = builder.age;
+        id = builder.id;
+        address = builder.address;
+        name = builder.name;
+    }
+    public String getName() {
+        return name;
+    }
+    static class Builder {
+        private String name;
+        private int age;
+        private int id;
+        private String address;
+        //灵活选用参数
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+        public Builder setAge(int age) {
+            this.age = age;
+            return this;
+        }
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
+        public Builder setAddress(String address) {
+            this.address = address;
+            return this;
+        }
+        public User build(){
+            return new User(this);
+        }
+    }
+    public static void main(String[] args){
+        User user = new User.Builder().setId(1).setName("lilei").setAge(10).build();
+        System.out.print(user.getName());
+    }
+}
+
+
 Client director builder product
 
 https://www.cnblogs.com/lwbqqyumidi/p/3742562.html
